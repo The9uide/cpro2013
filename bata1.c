@@ -1,27 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <dos.h>
 #include <time.h>
 #define roll 29
 #define  column 78
 int main()
 {
 	char display[roll][column];
-	int c,m,i,j,count;
-	for(c=column;c>=0;c--)
+	int column_slide,m,i,j,count;
+	for(column_slide=column;column_slide>=0;column_slide--)
 	{
 		system("cls");
 		for(m=0;m<roll;m++)
 		{	
 			cleardis(display);
 
-			home(display,c,m);
+			home(display,column_slide,m);
 
 			printdis(display,m);
 
 			printf("\n");
 		}	
-		if(c<18)
+		if(column_slide<18)
 			break;
 	}
 }
@@ -48,7 +47,7 @@ void printdis(char display[roll][column],int m)
 	}
 }
 
-void home(char display[roll][column],int c,int m)
+void home(char display[roll][column],int column_slide,int m)
 {
 	int i,count =0;
 	char home[6][45]={	{"|     _________       _||____      ____     |"},
@@ -63,7 +62,8 @@ void home(char display[roll][column],int c,int m)
 						{"                    Option                   "},
 						{"                                             "},
 						{"                    Exit                     "}};
-	for(i=c;i<=column;i++)
+
+	for(i=column_slide;i<=column;i++)
 	{
 		if(m>=7&&m<13)
 		{
@@ -86,14 +86,9 @@ void home(char display[roll][column],int c,int m)
 	}
 }
 
-// void interface(char display[roll][column],int c,int m)
-// {
 
-// }
-
-// {"   _________       _||____      ____         "},
-// {"__/---------\_____/-||----\____/----\____    "},
-// {" /___________\   /_________\  /______\   \__ "},
-// {"/|           |\ /|         |\/|      |\     |"},
-// {" |           |   |         |  |      |      |"},
-// {" |___________|   |_________|  |______|      |"}};
+// What Work Who Work
+// Bank eer	>> Interface & map
+// Guide 	>> Game control > Interface > score > pointer move & check 
+// Prame 	>> Ranking 
+// Yok 		>> Interface move & color 
