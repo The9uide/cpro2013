@@ -5,7 +5,7 @@
 
 char display[roll][column];
 void startinterface();
-void cleardis(char display[roll][column]);
+void cleardis();
 void home(char display[roll][column],int column_slide,int m);
 int selectmenu();
 void moveselectmenu(int select);
@@ -15,6 +15,7 @@ void gotomenu(int select);
 void gameplay();
 void leaderboard();
 void option();
+void gameplayinterface();
 
 int main() //main
 {
@@ -28,7 +29,7 @@ void startinterface() //first page
 	for(column_slide=column;column_slide>=0;column_slide--) //print slide
 	{
 		system("cls"); //clear display
-		cleardis(display);
+		cleardis();
 		for(m=0;m<roll;m++) 
 		{	
 			home(display,column_slide,m);
@@ -39,7 +40,7 @@ void startinterface() //first page
 	}
 }
 
-void cleardis(char display[roll][column]) //clear  array display
+void cleardis() //clear  array display
 {
 	int m,j;
 	for(m=0;m<roll;m++)
@@ -51,7 +52,7 @@ void cleardis(char display[roll][column]) //clear  array display
 	}
 }
 
-void home(char display[roll][column],int column_slide,int m)
+void home(char display[roll][column],int column_slide,int m) //add interface to display
 {
 	int i,count =0;
 	char home[6][51]={							{" +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ "},
@@ -177,7 +178,9 @@ void gotomenu(int select) 	//go to page
 void gameplay()
 {
 	system("cls");
-	printf("Gameplay");
+	cleardis();
+	gameplayinterface();
+	printdis();
 }
 
 void leaderboard()
@@ -189,6 +192,28 @@ void option()
 {
 	system("cls");
 	printf("Option");
+}
+
+void gameplayinterface()
+{
+	void frame()
+	{
+		char adds = '#';
+		int m,j;
+		for(m=0;m<roll;m++)
+		{	
+			for(j=0;j<column;j++)
+			{
+				if((m>=0 && m<=4) || m==28 || j<=1 || j>=76)
+				{
+					display[m][j]= adds;
+				}
+			}
+		}
+	}
+
+	frame();
+
 }
 // What Work Who Work
 // Bank eer	>> Interface & map
