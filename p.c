@@ -15,7 +15,6 @@ void gotomenu(int select);
 void gameplay();
 void leaderboard();
 void option();
-void gameplayinterface();
 
 int main() //main
 {
@@ -176,11 +175,97 @@ void gotomenu(int select) 	//go to page
 
 void gameplay()
 {
-	int score1=5,time1;
+	char field1[22][74],in;
+	int score1=5,time1,x=2,y=5;
+	void gameplayinterface()
+	{
+		void frame()
+		{
+			char adds = '#';
+			int m,j;
+			for(m=0;m<roll;m++)
+			{	
+				for(j=0;j<column;j++)
+				{
+					if((m>=0 && m<=4) || m==28 || j<=1 || j>=76)
+					{
+						display[m][j]= adds;
+					}
+				}
+			}
+		}
+
+		void showscore()
+		{
+			char player1[3][21] = {		{"                     "},
+										{"   Player1: 5 Point  "},
+										{"                     "}};
+			int m,j;
+			for(m=0;m<3;m++)
+			{	
+				for(j=0;j<21;j++)
+				{
+					display[1+m][7+j] = player1[m][j];
+				}
+			}
+		}
+
+		frame();
+		showscore();
+	}
+
+	void addpointer()
+	{
+		char pointer[3][3] = {	{"+-+"},
+								{"IOI"},
+								{"+-+"}};
+		int m,j;
+		for(m=0;m<3;m++)
+		{	
+			for(j=0;j<3;j++)
+			{
+				display[y+m][x+j] = pointer[m][j];
+			}
+		}
+	}
+
+	void movepointer()
+	{
+		if(in == 'w' || in == 'W')
+		{
+			y-=1;
+			y = (y<5) ? y+1:y;
+		}
+		else if(in == 's' || in == 'S')
+		{
+			y+=1;
+			y = (y>25) ? y-1:y;
+		}
+		else if(in == 'a' || in == 'A')
+		{
+			x-=1;
+			x = (x<2) ? x+1:x;
+		}
+		else if(in == 'd' || in == 'D')
+		{
+			x+=1;
+			x = (x>73) ? x-1:x;
+		}
+	}
+
 	system("cls");
 	cleardis();
-	gameplayinterface(score1,time1);
+	gameplayinterface();
 	printdis();
+	while(1)
+	{
+		system("cls");
+		// addfield();
+		addpointer();
+		printdis();
+		in = getch();
+		movepointer();
+	}
 }
 
 void leaderboard()
@@ -194,44 +279,6 @@ void option()
 	printf("Option");
 }
 
-void gameplayinterface(int score1,int time1)
-{
-	void frame()
-	{
-		char adds = '#';
-		int m,j;
-		for(m=0;m<roll;m++)
-		{	
-			for(j=0;j<column;j++)
-			{
-				if((m>=0 && m<=4) || m==28 || j<=1 || j>=76)
-				{
-					display[m][j]= adds;
-				}
-			}
-		}
-	}
-
-	void showscore(int score1)
-	{
-		char player1[3][10] = {		{"          "},
-									{" Player 5 "},
-									{"          "}};
-		int m,j;
-		for(m=0;m<3;m++)
-		{	
-			for(j=0;j<10;j++)
-			{
-				display[1+m][7+j] = player1[m][j];
-			}
-		}
-	}
-	frame();
-	showscore(score1);
-	// showtime();
-	
-
-}
 // What Work Who Work
 // Bank eer	>> Interface & map
 // Guide 	>> Game control > Interface > score > pointer move & check 
