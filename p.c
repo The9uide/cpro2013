@@ -175,8 +175,9 @@ void gotomenu(int select) 	//go to page
 
 void gameplay()
 {
-	char field1[22][74],in;
+	char field1[23][74],in;
 	int score1=5,time1,x=2,y=5;
+	
 	void gameplayinterface()
 	{
 		void frame()
@@ -214,6 +215,18 @@ void gameplay()
 		showscore();
 	}
 
+	void clearfield()
+	{
+		int m,j;
+		for(m=0;m<23;m++)
+		{	
+			for(j=0;j<74;j++)
+			{
+				field1[m][j] = ' ';
+			}
+		}
+	}
+
 	void addpointer()
 	{
 		char pointer[3][3] = {	{"+-+"},
@@ -225,6 +238,18 @@ void gameplay()
 			for(j=0;j<3;j++)
 			{
 				display[y+m][x+j] = pointer[m][j];
+			}
+		}
+	}
+
+	void addfield()
+	{
+		int m,j;
+		for(m=0;m<23;m++)
+		{	
+			for(j=0;j<74;j++)
+			{
+				display[5+m][2+j] = field1[m][j];
 			}
 		}
 	}
@@ -256,11 +281,12 @@ void gameplay()
 	system("cls");
 	cleardis();
 	gameplayinterface();
+	clearfield();
 	printdis();
 	while(1)
 	{
 		system("cls");
-		// addfield();
+		addfield();
 		addpointer();
 		printdis();
 		in = getch();
