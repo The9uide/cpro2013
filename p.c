@@ -172,14 +172,14 @@ void gotomenu(int select) 	//go to page
 	{
 		exit(0);
 	}
-
 }
 
 void gameplay()
 {
+	int score1=5,time1;
 	system("cls");
 	cleardis();
-	gameplayinterface();
+	gameplayinterface(score1,time1);
 	printdis();
 }
 
@@ -194,7 +194,7 @@ void option()
 	printf("Option");
 }
 
-void gameplayinterface()
+void gameplayinterface(int score1,int time1)
 {
 	void frame()
 	{
@@ -212,7 +212,24 @@ void gameplayinterface()
 		}
 	}
 
+	void showscore(int score1)
+	{
+		char player1[3][10] = {		{"          "},
+									{" Player 5 "},
+									{"          "}};
+		int m,j;
+		for(m=0;m<3;m++)
+		{	
+			for(j=0;j<10;j++)
+			{
+				display[1+m][7+j] = player1[m][j];
+			}
+		}
+	}
 	frame();
+	showscore(score1);
+	// showtime();
+	
 
 }
 // What Work Who Work
