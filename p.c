@@ -21,6 +21,7 @@ void readScore();
 int main() //main
 {
 	startinterface();
+	saveScore("Pame",100);
 	gotomenu(selectmenu());
 }
 
@@ -337,7 +338,14 @@ void option()
 //
 void saveScore(char playerName[100] , int playerScore)
 {
-
+	FILE *f = fopen("score.txt", "w");
+	if (f == NULL)
+	{
+	    printf("Error opening score file!\n");
+	    exit(1);
+	}
+	fprintf(f, "%s,%d\n", playerName,playerScore);
+	fclose(f);
 }
 void readScore()
 {
