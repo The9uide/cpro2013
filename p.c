@@ -351,17 +351,23 @@ void saveScore(char playerName[100] , int playerScore)
 void readScore()
 {
 	//use to read score file
-   char ch, file_name[25];
+   char ch, file_name[25],stringlong[10000];
+   int i = 0;
    FILE *fp;
    fp = fopen("score.txt","r");      // opening file in read mode
-
    if( fp == NULL )
    {
       perror("Error while opening the file.\n");
       exit(EXIT_FAILURE);
    }
    while( ( ch = fgetc(fp) ) != EOF )        //   reading file..
-      printf("%c",ch);
-
+	 { 
+	 	stringlong[i] = ch;
+	 	i++;
+	 }
+	 stringlong[i] = '\0';
    fclose(fp);
+   //end read file
+   //Start fetch file to array
+   //End fetch
 }
