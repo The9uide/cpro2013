@@ -15,6 +15,8 @@ void gotomenu(int select);
 void gameplay();
 void leaderboard();
 void option();
+void saveScore(char playerName[100] , int playerScore);
+void readScore();
 
 int main() //main
 {
@@ -331,3 +333,13 @@ void option()
 // Guide 	>> Game control > Interface > score > pointer move & check 
 // Prame 	>> Ranking 
 // Yok 		>> Interface move & color 
+
+//
+void saveScore(char playerName[100] , int playerScore)
+{
+
+}
+void readScore()
+{
+
+}
