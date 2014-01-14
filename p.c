@@ -21,7 +21,6 @@ void readScore();
 int main() //main
 {
 	startinterface();
-	saveScore("Pame",100);
 	gotomenu(selectmenu());
 }
 
@@ -92,7 +91,6 @@ void home(char display[roll][column],int column_slide,int m) //add interface to 
 			display[m][i] = start[m-17][count];
 		}
 		count += 1;
-
 	}
 }
 
@@ -338,6 +336,7 @@ void option()
 //
 void saveScore(char playerName[100] , int playerScore)
 {
+	//use to save score file
 	FILE *f = fopen("score.txt", "w");
 	if (f == NULL)
 	{
@@ -349,5 +348,18 @@ void saveScore(char playerName[100] , int playerScore)
 }
 void readScore()
 {
+	//use to read score file
+   char ch, file_name[25];
+   FILE *fp;
+   fp = fopen("score.txt","r");      // opening file in read mode
 
+   if( fp == NULL )
+   {
+      perror("Error while opening the file.\n");
+      exit(EXIT_FAILURE);
+   }
+   while( ( ch = fgetc(fp) ) != EOF )        //   reading file..
+      printf("%c",ch);
+
+   fclose(fp);
 }
