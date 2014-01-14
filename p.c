@@ -25,6 +25,7 @@ int main() //main
 void startinterface() //first page
 {
 	int column_slide,m,i,j,count;
+	system("mode con:cols=79 lines=30");
 	for(column_slide=column;column_slide>=0;column_slide--) //print slide
 	{
 		system("cls"); //clear display
@@ -198,21 +199,41 @@ void gameplay()
 
 		void showscore()
 		{
-			char player1[3][21] = {		{"                     "},
-										{"   Player1: 5 Point  "},
-										{"                     "}};
+			char 	player1[3][21] = {		{"                     "},
+											{"   Player1: 0 Point  "},
+											{"                     "}}
+					,player2[3][21] = {		{"                     "},
+											{"   Player2: 0 Point  "},
+											{"                     "}};
 			int m,j;
 			for(m=0;m<3;m++)
 			{	
 				for(j=0;j<21;j++)
 				{
-					display[1+m][7+j] = player1[m][j];
+					display[1+m][3+j] = player1[m][j];
+					display[1+m][54+j] = player2[m][j];
+				}
+			}
+		}
+
+		void showheader()
+		{
+			char 	p1round[3][26] = { 		{"                          "},
+											{"       Player1 Round      "},
+											{"                          "}};
+			int m,j;
+			for(m=0;m<3;m++)
+			{	
+				for(j=0;j<26;j++)
+				{
+					display[1+m][26+j] = p1round[m][j];
 				}
 			}
 		}
 
 		frame();
 		showscore();
+		showheader();
 	}
 
 	void clearfield()
