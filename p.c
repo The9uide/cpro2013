@@ -17,6 +17,8 @@ void leaderboard();
 void option();
 void saveScore(char playerName[100] , int playerScore);
 void readScore();
+char UserRank[3][100];
+int scoreRank[3][1];
 
 int main() //main
 {
