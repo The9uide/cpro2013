@@ -20,6 +20,7 @@ void readScore();
 void sortRank();
 char UserRank[3][100];
 int scoreRank[3][1];
+int maxer=0,meaner=0,lowxer=0; // index of rank Maxer = 1 Meaner = 2 Lower = 3
 
 int main() //main
 {
@@ -432,5 +433,41 @@ void readScore()
 }
 void sortRank()
 {
-
+	//use to sort rank
+	if (scoreRank[0][0] >=scoreRank[1][0] && scoreRank[1][0] >= scoreRank[2][0])
+	{
+		maxer = 0;
+		meaner =1;
+		lowxer =2;
+	}
+	else if(scoreRank[2][0] >=scoreRank[1][0] && scoreRank[1][0] >= scoreRank[0][0])
+	{
+		maxer = 2;
+		meaner =1;
+		lowxer =0;
+	}
+	else if(scoreRank[1][0] >=scoreRank[0][0] && scoreRank[0][0] >= scoreRank[2][0])
+	{
+		maxer = 1;
+		meaner =0;
+		lowxer =2;
+	}	
+	else if(scoreRank[2][0] >=scoreRank[0][0] && scoreRank[0][0] >= scoreRank[1][0])
+	{
+		maxer = 2;
+		meaner =0;
+		lowxer =1;
+	}
+	else if(scoreRank[1][0] >=scoreRank[2][0] && scoreRank[2][0] >= scoreRank[0][0])
+	{
+		maxer = 1;
+		meaner =2;
+		lowxer =0;
+	}
+	else if(scoreRank[0][0] >=scoreRank[2][0] && scoreRank[2][0] >= scoreRank[1][0])
+	{
+		maxer = 0;
+		meaner =2;
+		lowxer =1;
+	}
 }
