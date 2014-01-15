@@ -18,6 +18,7 @@ void option();
 void saveScore(char playerName[100] , int playerScore);
 void readScore();
 void sortRank();
+void checkSaveRank(int nowscore);
 char UserRank[3][100];
 int scoreRank[3][1];
 int maxer=0,meaner=0,lowxer=0; // index of rank Maxer = 1 Meaner = 2 Lower = 3
@@ -470,4 +471,8 @@ void sortRank()
 		meaner =2;
 		lowxer =1;
 	}
+}
+void checkSaveRank(int nowscore)
+{
+
 }
