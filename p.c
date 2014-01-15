@@ -24,6 +24,7 @@ int main() //main
 {
 	startinterface();
 	gotomenu(selectmenu());
+	//readScore();
 }
 
 void startinterface() //first page
@@ -41,6 +42,7 @@ void startinterface() //first page
 		printdis();
 		if(column_slide<15)
 			break;
+
 	}
 }
 
@@ -94,6 +96,7 @@ void home(char display[roll][column],int column_slide,int m) //add interface to 
 		}
 		count += 1;
 	}
+
 }
 
 int selectmenu() 
@@ -369,5 +372,60 @@ void readScore()
    fclose(fp);
    //end read file
    //Start fetch file to array
+   int i2 = 0,i3=0,i5=0;
+   char temp_name[100];
+   char temp_score[100];
+   int sw = 0;
+   for (i2 = 0; i2 <= i; ++i2)
+   {
+   	if(sw==0)
+   	{
+   		if(stringlong[i2]==',')
+   		{
+   			sw = 1 ;
+   			int i4 = 0;
+   			while(i4<i5)
+   			{
+   				UserRank[i3][i4] = temp_name[i4];
+   				i4++;
+   			}
+   			UserRank[i3][i4] = '\0';
+   			i5 = 0;
+   			printf("%s ",UserRank[i3] );
+   		}
+   		else
+   		{
+   			temp_name[i5] = stringlong[i2];
+   			i5++;
+   		}
+   	}
+   	else
+   	{
+   		if(stringlong[i2]==',')
+   		{
+   			sw = 0 ;
+   			temp_score[i5] = '\0';
+   			scoreRank[i3][0] = atoi(temp_score);
+   			printf("%d\n",scoreRank[i3][0]);
+   			i5 = 0;
+   			i3++;
+   		}
+   		else
+   		{
+   			temp_score[i5] = stringlong[i2];
+   			i5++;
+   			if(i2==i-1)
+   			{
+   				sw = 0 ;
+	   			temp_score[i5] = '\0';
+	   			scoreRank[i3][0] = atoi(temp_score);
+	   			printf("%d\n",scoreRank[i3][0]);
+	   			i5 = 0;
+	   			i3++;
+   			}
+   		}
+   	}
+
+   }
    //End fetch
 }
