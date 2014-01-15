@@ -17,6 +17,7 @@ void leaderboard();
 void option();
 void saveScore(char playerName[100] , int playerScore);
 void readScore();
+void sortRank();
 char UserRank[3][100];
 int scoreRank[3][1];
 
@@ -391,7 +392,7 @@ void readScore()
    			}
    			UserRank[i3][i4] = '\0';
    			i5 = 0;
-   			printf("%s ",UserRank[i3] );
+   			//printf("%s ",UserRank[i3] );
    		}
    		else
    		{
@@ -406,7 +407,7 @@ void readScore()
    			sw = 0 ;
    			temp_score[i5] = '\0';
    			scoreRank[i3][0] = atoi(temp_score);
-   			printf("%d\n",scoreRank[i3][0]);
+   			//printf("%d\n",scoreRank[i3][0]);
    			i5 = 0;
    			i3++;
    		}
@@ -419,7 +420,7 @@ void readScore()
    				sw = 0 ;
 	   			temp_score[i5] = '\0';
 	   			scoreRank[i3][0] = atoi(temp_score);
-	   			printf("%d\n",scoreRank[i3][0]);
+	   			//printf("%d\n",scoreRank[i3][0]);
 	   			i5 = 0;
 	   			i3++;
    			}
@@ -428,4 +429,8 @@ void readScore()
 
    }
    //End fetch
+}
+void sortRank()
+{
+
 }
