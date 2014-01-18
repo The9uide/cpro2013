@@ -342,7 +342,7 @@ void option()
 // Yok 		>> Interface move & color 
 
 //
-void saveScore(char playerName[100] , int playerScore)
+void saveScore(char playerName[100] , int playerScore,int swt)
 {
 	//use to save score file
 	FILE *f = fopen("score.txt", "w");
@@ -352,6 +352,18 @@ void saveScore(char playerName[100] , int playerScore)
 	    exit(1);
 	}
 	fprintf(f, "%s,%d\n", playerName,playerScore);
+	if(swt==0)
+	{
+		fprintf(f, "%s,%d,%s,%d,%s,%d\n", playerName,playerScore,UserRank[1],scoreRank[1],UserRank[2],scoreRank[2]);
+	}
+	else if(swt==1)
+	{
+		fprintf(f, "%s,%d,%s,%d,%s,%d\n", UserRank[0],scoreRank[0],playerName,playerScore,UserRank[2],scoreRank[2]);
+	}
+	else if(swt==2)
+	{
+		fprintf(f, "%s,%d,%s,%d,%s,%d\n", UserRank[0],scoreRank[0],UserRank[1],scoreRank[1],playerName,playerScore);
+	}
 	fclose(f);
 }
 void readScore()
@@ -430,6 +442,7 @@ void readScore()
    	}
 
    }
+   sortRank();
    //End fetch
 }
 void sortRank()
@@ -472,18 +485,21 @@ void sortRank()
 		lowxer =1;
 	}
 }
+//use this
 void checkSaveRank(char playerName[100] ,int nowscore)
 {
+	//checkSaveRank <-- PlayerName , Player Score
+	//use to check for save
 	if(scoreRank[maxer][0]<= nowscore)
 	{
-		saveScore(playerName[100],nowscore);
+		saveScore(playerName[100],nowscore,0);
 	}
 	else if(scoreRank[meaner][0]<= nowscore)
 	{
-		saveScore(playerName[100],nowscore);
+		saveScore(playerName[100],nowscore,1);
 	}
 	else if(scoreRank[lowxer][0]<= nowscore)
 	{
-		saveScore(playerName[100],nowscore);
+		saveScore(playerName[100],nowscore,2);
 	}
 }
