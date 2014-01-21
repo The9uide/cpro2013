@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define roll 29
-#define  column 78
+#define column 78
 
 char display[roll][column];
 void startinterface();
@@ -21,7 +21,7 @@ void sortRank();
 void checkSaveRank(char playerName[100] ,int nowscore);
 char UserRank[3][100];
 int scoreRank[3][1];
-int maxer=0,meaner=0,lowxer=0; // index of rank Maxer = 1 Meaner = 2 Lower = 3
+int first=0,second=0,third=0; // index of rank first = 1 second = 2 Lower = 3
 
 int main() //main
 {
@@ -65,19 +65,20 @@ void home(char display[roll][column],int column_slide,int m) //add interface to 
 {
 	int i,count =0;
 	char home[6][51]={							{" +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ "},
-                                                {"|   _    _  ___ ___      __     __      ___  __   |"},
-                                                {"|  |_)  /_\\  |   |  |   |__    (__ |__|  |  |__)  |"},
-                                                {"|  |_) /   \\ |   |  |__ |__     __)|  | _|_ |     |"},
- 												{"|                                       ComPrompt |"},
-                                                {" -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+ "}}
-		
-		,start[7][51]={							{"                         Start                     "},
+                                                {"|   _    _   ___ ___      __     __      ___  __  |"},
+                                                {"|  |_)  /_\\  |   |  |   |__    (__ |__|  |  |__) |"},
+                                                {"|  |_) /   \\ |   |  |__ |__     __)|  | _|_ |    |"},
+ 												{"|                                        ComPrompt|"},
+                                                {" -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+ "}
+    },
+    start[7][51]={								{"                         Start                     "},
                                                 {"                                                   "},
                                                 {"                      Leaderboard                  "},
                                                 {"                                                   "},
                                                 {"                         Option                    "},
                                                 {"                                                   "},
-                                                {"                          Exit                     "}};
+                                                {"                          Exit                     "}
+    };
 
 	for(i=column_slide;i<column;i++)
 	{
@@ -210,10 +211,13 @@ void gameplay()
 		{
 			char 	player1[3][21] = {		{"                     "},
 											{"   Player1: 0 Point  "},
-											{"                     "}}
-					,player2[3][21] = {		{"                     "},
+											{"                     "}
+					},
+
+					player2[3][21] = {		{"                     "},
 											{"   Player2: 0 Point  "},
-											{"                     "}};
+											{"                     "}
+					};
 			int m,j;
 			for(m=0;m<3;m++)
 			{	
@@ -227,9 +231,10 @@ void gameplay()
 
 		void showheader()
 		{
-			char 	p1round[3][26] = { 		{"                          "},
+			char p1round[3][26] = { 		{"                          "},
 											{"       Player1 Round      "},
-											{"                          "}};
+											{"                          "}
+			};
 			int m,j;
 			for(m=0;m<3;m++)
 			{	
@@ -261,7 +266,8 @@ void gameplay()
 	{
 		char pointer[3][3] = {	{"+-+"},
 								{"IOI"},
-								{"+-+"}};
+								{"+-+"}
+		};
 		int m,j;
 		for(m=0;m<3;m++)
 		{	
@@ -450,39 +456,39 @@ void sortRank()
 	//use to sort rank
 	if (scoreRank[0][0] >=scoreRank[1][0] && scoreRank[1][0] >= scoreRank[2][0])
 	{
-		maxer = 0;
-		meaner =1;
-		lowxer =2;
+		first = 0;
+		second =1;
+		third =2;
 	}
 	else if(scoreRank[2][0] >=scoreRank[1][0] && scoreRank[1][0] >= scoreRank[0][0])
 	{
-		maxer = 2;
-		meaner =1;
-		lowxer =0;
+		first = 2;
+		second =1;
+		third =0;
 	}
 	else if(scoreRank[1][0] >=scoreRank[0][0] && scoreRank[0][0] >= scoreRank[2][0])
 	{
-		maxer = 1;
-		meaner =0;
-		lowxer =2;
+		first = 1;
+		second =0;
+		third =2;
 	}	
 	else if(scoreRank[2][0] >=scoreRank[0][0] && scoreRank[0][0] >= scoreRank[1][0])
 	{
-		maxer = 2;
-		meaner =0;
-		lowxer =1;
+		first = 2;
+		second =0;
+		third =1;
 	}
 	else if(scoreRank[1][0] >=scoreRank[2][0] && scoreRank[2][0] >= scoreRank[0][0])
 	{
-		maxer = 1;
-		meaner =2;
-		lowxer =0;
+		first = 1;
+		second =2;
+		third =0;
 	}
 	else if(scoreRank[0][0] >=scoreRank[2][0] && scoreRank[2][0] >= scoreRank[1][0])
 	{
-		maxer = 0;
-		meaner =2;
-		lowxer =1;
+		first = 0;
+		second =2;
+		third =1;
 	}
 }
 //use this
@@ -490,15 +496,15 @@ void checkSaveRank(char playerName[100] ,int nowscore)
 {
 	//checkSaveRank <-- PlayerName , Player Score
 	//use to check for save
-	if(scoreRank[maxer][0]<= nowscore)
+	if(scoreRank[first][0]<= nowscore)
 	{
 		saveScore(playerName[100],nowscore,0);
 	}
-	else if(scoreRank[meaner][0]<= nowscore)
+	else if(scoreRank[second][0]<= nowscore)
 	{
 		saveScore(playerName[100],nowscore,1);
 	}
-	else if(scoreRank[lowxer][0]<= nowscore)
+	else if(scoreRank[third][0]<= nowscore)
 	{
 		saveScore(playerName[100],nowscore,2);
 	}
