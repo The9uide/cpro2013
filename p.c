@@ -15,10 +15,10 @@ void gotomenu(int select);
 void gameplay();
 void leaderboard();
 void option();
-void saveScore(char playerName[100] , int playerScore);
+void saveScore(char playerName[100] , int playerScore,int swt);
 void readScore();
 void sortRank();
-void checkSaveRank(char playerName[100] ,int nowscore);
+void checkSaveRank(char playerName2[100] ,int nowscore2);
 char UserRank[3][100];
 int scoreRank[3][1];
 int first=0,second=0,third=0; // index of rank first = 1 second = 2 Lower = 3
@@ -492,20 +492,23 @@ void sortRank()
 	}
 }
 //use this
-void checkSaveRank(char playerName[100] ,int nowscore)
+void checkSaveRank(char playerName2[100] ,int nowscore2)
 {
 	//checkSaveRank <-- PlayerName , Player Score
 	//use to check for save
-	if(scoreRank[first][0]<= nowscore)
+	int i9 = 0;
+	if(scoreRank[first][0]<= nowscore2)
 	{
-		saveScore(playerName[100],nowscore,0);
+		saveScore(&playerName2[100],nowscore2,i9);
 	}
-	else if(scoreRank[second][0]<= nowscore)
+	else if(scoreRank[second][0]<= nowscore2)
 	{
-		saveScore(playerName[100],nowscore,1);
+		i9=1;
+		saveScore(&playerName2[100],nowscore2,i9);
 	}
-	else if(scoreRank[third][0]<= nowscore)
+	else if(scoreRank[third][0]<= nowscore2)
 	{
-		saveScore(playerName[100],nowscore,2);
+		i9=2;
+		saveScore(&playerName2[100],nowscore2,i9);
 	}
 }
