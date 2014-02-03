@@ -186,7 +186,7 @@ void gotomenu(int select) 	//go to page
 
 void gameplay()
 {
-	char field1[23][74],in,fieldp1[23][74],fieldp2[23][74];
+	char field1[23][74],in,fieldp1[23][74],fieldp2[23][74],fieldp1hit[23][74],fieldp2hit[23][74];
 	int score1=5,time1,x=2,y=5,p1=1,p2=1,sizeship=6,countship=0;
 	
 	void gameplayinterface()
@@ -260,6 +260,8 @@ void gameplay()
 				field1[m][j] = ' ';
 				fieldp1[m][j] = ' ';
 				fieldp2[m][j] = ' ';
+				fieldp1hit[m][j] = ' ';
+				fieldp2hit[m][j] = ' ';
 			}
 		}
 	}
@@ -419,6 +421,21 @@ void gameplay()
 		}
 	}
 
+	void checkship()
+	{
+		int m,j;
+		for(m=0;m<3;m++)
+		{	
+			for(j=0;j<3;j++)
+			{
+				if(in == ' ')
+				{
+					field1[y+m-5][x+j-2] = (fieldp1[y+m-5][x+j-2] == '@') ? '#':' ';
+				}
+			}
+		}
+	}
+
 	system("cls");
 	cleardis();
 	gameplayinterface();
@@ -432,6 +449,7 @@ void gameplay()
 		addpointer();
 		printdis();
 		in = getch();
+		checkship();
 		movepointer();
 	}
 }
