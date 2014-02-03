@@ -187,7 +187,7 @@ void gotomenu(int select) 	//go to page
 void gameplay()
 {
 	char field1[23][74],in,fieldp1[23][74],fieldp2[23][74];
-	int score1=5,time1,x=2,y=5,p1=1,p2=1,sizeship=6;
+	int score1=5,time1,x=2,y=5,p1=1,p2=1,sizeship=6,countship=0;
 	
 	void gameplayinterface()
 	{
@@ -258,6 +258,8 @@ void gameplay()
 			for(j=0;j<74;j++)
 			{
 				field1[m][j] = ' ';
+				fieldp1[m][j] = ' ';
+				fieldp2[m][j] = ' ';
 			}
 		}
 	}
@@ -328,12 +330,11 @@ void gameplay()
 									{"\\----------/"}};
 			int m,j;
 			x = (in == ' ' && x >= 67) ? x-3:x;
-			sizeship = (in == ' ') ? (sizeship < 12) ? sizeship+3:sizeship:sizeship;
+			sizeship = (in == ' '&& countship%2 == 0) ? (sizeship < 12) ? sizeship+3:sizeship:sizeship;
 			for(m=0;m<3;m++)
 			{	
 				for(j=0;j<sizeship;j++)
 				{
-					
 					display[y+m][x+j] = (sizeship==6) ? small[m][j]:(sizeship==9) ? mid[m][j]:big[m][j];
 				}
 			}
@@ -362,16 +363,59 @@ void gameplay()
 				x = (x>76-sizeship) ? x-1:x;
 			}
 		}
+		void saveship()
+		{
+			char 	small[3][6] = {	{"@@@@@@"},
+									{"@@@@@@"},
+									{"@@@@@@"}},
+					mid[3][9]	= {	{"@@@@@@@@@"},
+									{"@@@@@@@@@"},
+									{"@@@@@@@@@"}},
+					big[3][12]	= {	{"@@@@@@@@@@@@"},
+									{"@@@@@@@@@@@@"},
+									{"@@@@@@@@@@@@"}};
+			int m,j;
 
+			if(in == ' ')
+			{
+				for(m=0;m<3;m++)
+				{	
+					for(j=0;j<sizeship;j++)
+					{		
+						fieldp1[y+m-5][x+j-2] = (sizeship==6) ? small[m][j]:(sizeship==9) ? mid[m][j]:big[m][j];
+					}
+				}
+				x = 2;
+				y = 5;
+				countship +=1;
+			}
+		}
+
+		void addfieldplayer()
+		{
+			int m,j;
+			for(m=0;m<23;m++)
+			{	
+				for(j=0;j<74;j++)
+				{
+					display[5+m][2+j] = fieldp1[m][j];
+				}
+			}
+		}
 		while(1)
 		{
 			system("cls");
-			addfield();
+			addfieldplayer();
 			addship();
 			printdis();
 			printf("%d",x);
 			in = getch();
+			saveship();
 			moveship();
+			if(countship == 6)
+			{
+				break;
+			}
 		}
 	}
 
