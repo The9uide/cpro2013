@@ -186,8 +186,8 @@ void gotomenu(int select) 	//go to page
 
 void gameplay()
 {
-	char field1[23][74],in;
-	int score1=5,time1,x=2,y=5;
+	char field1[23][74],in,fieldp1[23][74],fieldp2[23][74];
+	int score1=5,time1,x=2,y=5,p1=1,p2=1,sizeship=6;
 	
 	void gameplayinterface()
 	{
@@ -266,8 +266,7 @@ void gameplay()
 	{
 		char pointer[3][3] = {	{"+-+"},
 								{"IOI"},
-								{"+-+"}
-		};
+								{"+-+"}};
 		int m,j;
 		for(m=0;m<3;m++)
 		{	
@@ -314,11 +313,74 @@ void gameplay()
 		}
 	}
 
+	void deployship()
+	{
+		void addship()
+		{
+			char 	small[3][6] = {	{"/----\\"},
+									{"<####>"},
+									{"\\----/"}},
+					mid[3][9]	= {	{"/-------\\"},
+									{"<#######>"},
+									{"\\-------/"}},
+					big[3][12]	= {	{"/----------\\"},
+									{"<##########>"},
+									{"\\----------/"}};
+			int m,j;
+			x = (in == ' ' && x >= 67) ? x-3:x;
+			sizeship = (in == ' ') ? (sizeship < 12) ? sizeship+3:sizeship:sizeship;
+			for(m=0;m<3;m++)
+			{	
+				for(j=0;j<sizeship;j++)
+				{
+					
+					display[y+m][x+j] = (sizeship==6) ? small[m][j]:(sizeship==9) ? mid[m][j]:big[m][j];
+				}
+			}
+		}
+
+		void moveship()
+		{
+			if(in == 'w' || in == 'W')
+			{
+				y-=1;
+				y = (y<5) ? y+1:y;
+			}
+			else if(in == 's' || in == 'S')
+			{
+				y+=1;
+				y = (y>25) ? y-1:y;
+			}
+			else if(in == 'a' || in == 'A')
+			{
+				x-=1;
+				x = (x<2) ? x+1:x;
+			}
+			else if(in == 'd' || in == 'D')
+			{
+				x+=1;
+				x = (x>76-sizeship) ? x-1:x;
+			}
+		}
+
+		while(1)
+		{
+			system("cls");
+			addfield();
+			addship();
+			printdis();
+			printf("%d",x);
+			in = getch();
+			moveship();
+		}
+	}
+
 	system("cls");
 	cleardis();
 	gameplayinterface();
 	clearfield();
 	printdis();
+	deployship();
 	while(1)
 	{
 		system("cls");
