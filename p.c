@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h> 
+#include "color.h"
 #define roll 29
 #define column 78
 
@@ -33,7 +35,7 @@ int main() //main
 void startinterface() //first page
 {
 	int column_slide,m,i,j,count;
-	system("mode con:cols=79 lines=30");
+	// system("mode con:cols=79 lines=30");
 	for(column_slide=column;column_slide>=0;column_slide--) //print slide
 	{
 		system("cls"); //clear display
