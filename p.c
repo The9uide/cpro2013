@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <windows.h> 
-#include "color.h"
+// #include <windows.h> 
+// #include "color.h"
 #define roll 29
 #define column 78
 
@@ -189,7 +189,7 @@ void gotomenu(int select) 	//go to page
 void gameplay()
 {
 	char field1[23][74],in,fieldp1[23][74],fieldp2[23][74],fieldp1hit[23][74],fieldp2hit[23][74];
-	int score1=5,time1,x=2,y=5,p1=1,p2=1,sizeship=6,countship=0;
+	int score1=5,time1,x=2,y=5,p1=1,p2=1,sizeship=6,countship=0,playerround=0;
 	
 	void gameplayinterface()
 	{
@@ -386,7 +386,14 @@ void gameplay()
 				{	
 					for(j=0;j<sizeship;j++)
 					{		
-						fieldp1[y+m-5][x+j-2] = (sizeship==6) ? small[m][j]:(sizeship==9) ? mid[m][j]:big[m][j];
+						if(playerround%2 == 0)
+						{
+							fieldp2[y+m-5][x+j-2] = (sizeship==6) ? small[m][j]:(sizeship==9) ? mid[m][j]:big[m][j];
+						}
+						else
+						{
+							fieldp1[y+m-5][x+j-2] = (sizeship==6) ? small[m][j]:(sizeship==9) ? mid[m][j]:big[m][j];
+						}
 					}
 				}
 				x = 2;
@@ -402,7 +409,8 @@ void gameplay()
 			{	
 				for(j=0;j<74;j++)
 				{
-					display[5+m][2+j] = fieldp1[m][j];
+					
+					display[5+m][2+j] = (playerround%2 == 0) ? fieldp1[m][j]:fieldp2[m][j];
 				}
 			}
 		}
@@ -416,10 +424,16 @@ void gameplay()
 			in = getch();
 			saveship();
 			moveship();
-			if(countship == 6)
+			if(countship == 6 && playerround == 1 )
 			{
 				break;
 			}
+			if(countship == 6)
+			{
+				playerround += 1;
+				sizeship = 3;
+				countship = 0;
+			} 
 		}
 	}
 
