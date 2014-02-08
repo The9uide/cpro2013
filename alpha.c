@@ -108,19 +108,18 @@ void home_leader() //add interface to display
 {
 	readScore();
 	int i,count =0;
-	char home[6][61]={							{"           +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n"},
-                                                {"          |  LEADERBOARD_ ___      __     __      ___  __  |\n"}, 
-                                                {"          |  |_)  /_\\  |   |  |   |__    (__ |__|  |  |__) |\n"},
-                                                {"          |  |_) /   \\ |   |  |__ |__     __)|  | _|_ |    |\n"},
- 												{"          |                                       ComPrompt|\n"},
-                                                {"           -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+\n"}
+	char home[6][51]={							{" +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n"},
+                                                {"|  LEADERBOARD_ ___      __     __      ___  __  |\n"}, 
+                                                {"|  |_)  /_\\  |   |  |   |__    (__ |__|  |  |__) |\n"},
+                                                {"|  |_) /   \\ |   |  |__ |__     __)|  | _|_ |    |\n"},
+ 												{"|                                       ComPrompt|\n"},
+                                                {" -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+\n"}
     };
-    printf("\n\n\n");
 	printf("%s\n",home[0] ); 
-	printf("           %s  -  %d\n",UserRank[0],scoreRank[0][0] );
-	printf("           %s  -  %d\n",UserRank[1],scoreRank[1][0] );
-	printf("           %s  -  %d\n",UserRank[2],scoreRank[2][0] );
-	printf("Press Any Key to Back\n");
+	printf(" > 1st  %s  -  %d Point\n",UserRank[0],scoreRank[0][0] );
+	printf(" > 2nd  %s  -  %d Point\n",UserRank[1],scoreRank[1][0] );
+	printf(" > 3rd  %s  -  %d Point\n",UserRank[2],scoreRank[2][0] );
+	printf("\nPress Any Key to Back\n");
 
 
 }
