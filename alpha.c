@@ -103,7 +103,51 @@ void home(char display[roll][column],int column_slide,int m) //add interface to 
 		count += 1;
 	}
 }
+//pame code
+void home_leader(char display[roll][column],int column_slide,int m) //add interface to display
+{
+	int i,count =0;
+	char home[6][51]={							{" +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ "},
+                                                {"|  LEADERBOARD_ ___      __     __      ___  __   |"}, 
+                                                {"|  |_)  /_\\  |   |  |   |__    (__ |__|  |  |__)  |"},
+                                                {"|  |_) /   \\ |   |  |__ |__     __)|  | _|_ |     |"},
+ 												{"|                                        ComPrompt|"},
+                                                {" -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+ "}
+    },
+    start[7][51]={								{"                         Start                     "},
+                                                {"                                                   "},
+                                                {"                      Leaderboard                  "},
+                                                {"                                                   "},
+                                                {"                         Option                    "},
+                                                {"                                                   "},
+                                                {"                          Exit                     "}
+    };
 
+	for(i=column_slide;i<column;i++)
+	{
+		if(m>=7&&m<13)
+		{
+			if(count==51)
+			{
+				break;
+			}
+			display[m][i] = home[m-7][count];
+		}
+		if(m>=17&&m<24)
+		{
+			if(count==51)
+			{
+				break;
+			}
+			display[m][i] = start[m-17][count];
+		}
+		count += 1;
+	}
+	//printf("Press Any Key to Back\n");
+
+
+}
+//end pame code
 int selectmenu() 
 {
 	char in;
@@ -180,6 +224,26 @@ void gotomenu(int select) 	//go to page
 	else if(select == 1)
 	{
 		leaderboard();
+		//Print Leaderboard
+		int column_slide,m,i,j,count;
+		// system("mode con:cols=79 lines=30");
+		for(column_slide=column;column_slide>=0;column_slide-=2) //print slide
+		{
+			system("cls"); //clear display
+			cleardis();
+			for(m=0;m<roll;m++) 
+			{	
+				home_leader(display,column_slide,m);
+			}
+			printdis();
+			if(column_slide<15)
+				break;
+
+		}
+		//end Print Leaderboard
+		char in = getch(); //input
+		startinterface();
+		gotomenu(selectmenu());
 	}
 	else if(select == 2)
 	{
@@ -495,6 +559,7 @@ void leaderboard()
 {
 	system("cls");
 	printf("Leaderboard");
+
 }
 void option()
 {
