@@ -31,7 +31,7 @@ int main() //main
 {
 	startinterface();
 	gotomenu(selectmenu());
-	//readScore();
+	readScore();
 }
 
 void startinterface() //first page
@@ -110,6 +110,7 @@ void home(char display[roll][column],int column_slide,int m) //add interface to 
 void home_leader() //add interface to display
 {
 	readScore();
+	sortRank();
 	int i,count =0;
 	char home[6][51]={							{" +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n"},
                                                 {"|  LEADERBOARD_ ___      __     __      ___  __  |\n"}, 
@@ -119,9 +120,9 @@ void home_leader() //add interface to display
                                                 {" -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+\n"}
     };
 	printf("%s\n",home[0] ); 
-	printf(" > 1st  %s  -  %d Point\n",UserRank[0],scoreRank[0][0] );
-	printf(" > 2nd  %s  -  %d Point\n",UserRank[1],scoreRank[1][0] );
-	printf(" > 3rd  %s  -  %d Point\n",UserRank[2],scoreRank[2][0] );
+	printf(" > 1st  %s  -  %d Point\n",UserRank[first],scoreRank[first][0] );
+	printf(" > 2nd  %s  -  %d Point\n",UserRank[second],scoreRank[second][0] );
+	printf(" > 3rd  %s  -  %d Point\n",UserRank[third],scoreRank[third][0] );
 	printf("\nPress Any Key to Back\n");
 
 
@@ -577,11 +578,13 @@ void gameplay()
 		{
 			winner = 0;
 			scorewinner=score1;
+			checkSaveRank(game_player[winner],scorewinner);
 		}
 		else if(score2>score1)
 		{
 			winner = 1;
 			scorewinner = score2;
+			checkSaveRank(game_player[winner],scorewinner);
 		}
 		else
 		{
