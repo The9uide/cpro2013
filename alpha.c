@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <windows.h> 
 #include "color.h"
 #define roll 29
@@ -23,7 +24,7 @@ char game_player[2][100];
 void sortRank();
 void checkSaveRank(char playerName2[100] ,int nowscore2);
 char UserRank[3][100];
-int scoreRank[3][1];
+int scoreRank[3][1],winner,scorewinner;
 int first=0,second=0,third=0; // index of rank first = 1 second = 2 Lower = 3
 
 int main() //main
@@ -251,7 +252,7 @@ void gotomenu(int select) 	//go to page
 void gameplay()
 {
 	char field1[23][74],field2[23][74],in,fieldp1[23][74],fieldp2[23][74];
-	int score1=5,time1,x=2,y=5,p1=1,p2=1,sizeship=6,countship=0,playerround=0;
+	int score1=0,score2=0,time1,x=2,y=5,p1=1,p2=1,sizeship=6,countship=0,playerround=0,countshoot=0;
 	
 	void gameplayinterface()
 	{
@@ -296,10 +297,10 @@ void gameplay()
 		void showheader()
 		{
 			char p1round[3][26] = { 		{"                          "},
-											{"       Player1 Round      "},
+											{"       Player1 Round 1    "},
 											{"                          "}},
 				 p2round[3][26] = { 		{"                          "},
-											{"       Player2 Round      "},
+											{"       Player2 Round 1    "},
 											{"                          "}};
 			int m,j;
 			for(m=0;m<3;m++)
@@ -477,6 +478,7 @@ void gameplay()
 				}
 			}
 		}
+
 		while(1)
 		{
 			system("cls");
@@ -506,6 +508,7 @@ void gameplay()
 		int m,j;
 		if(in == ' ')
 		{
+			countshoot++;
 			playerround += 1;
 			for(m=0;m<3;m++)
 			{	
@@ -513,14 +516,75 @@ void gameplay()
 				{
 					if(playerround%2 == 0)
 					{
-						field2[y+m-5][x+j-2] = (fieldp1[y+m-5][x+j-2] == '@') ? '*':' ';
+						if(fieldp1[y+m-5][x+j-2] == '@')
+						{
+							field2[y+m-5][x+j-2] = '*';
+							score2++;
+						}
 					}
 					else
 					{
-						field1[y+m-5][x+j-2] = (fieldp2[y+m-5][x+j-2] == '@') ? '*':' ';
+						if(fieldp2[y+m-5][x+j-2] == '@')
+						{
+							field1[y+m-5][x+j-2] = '*';
+							score1++;
+						}
 					}
 				}
 			}
+		}
+	}
+
+	void addscore()
+	{
+		char sc[10];
+		if(score1<=9)
+		{
+			itoa(score1,sc,10);
+			display[2][15] = sc[0];
+		}
+		else
+		{
+			itoa((score1%10),sc,10);
+			display[2][15] = sc[0];
+			itoa((score1/10),sc,10);
+			display[2][14] = sc[0];
+		}
+		if(score2<=9)
+		{
+			itoa(score2,sc,10);
+			display[2][66] = sc[0];
+		}
+		else
+		{
+			itoa((score2%10),sc,10);
+			display[2][66] = sc[0];
+			itoa((score2/10),sc,10);
+			display[2][65] = sc[0];
+		}
+	}
+
+	void draw()
+	{
+		startinterface();
+		gotomenu(selectmenu());
+	}
+
+	void checkwinner() 
+	{
+		if(score1>score2)
+		{
+			winner = 0;
+			scorewinner=score1;
+		}
+		else if(score2>score1)
+		{
+			winner = 1;
+			scorewinner = score2;
+		}
+		else
+		{
+			draw();
 		}
 	}
 
@@ -536,30 +600,20 @@ void gameplay()
 		gameplayinterface();
 		addfield();
 		addpointer();
+		addscore();
 		printdis();
+		printf("%d %d",score1,score2);
 		in = getch();
 		checkship();
 		movepointer();
-		if(countship == 6 && playerround == 1 )
-			{
-				playerround += 1;
-				break;
-			}
+		if(countshoot>=50)
+		{
+			checkwinner();
+			break;
+		}
+		
 	}
 }
-
-void leaderboard()
-{
-	system("cls");
-	printf("Leaderboard");
-
-}
-void option()
-{
-	system("cls");
-	printf("Option");
-}
-
 // What Work Who Work
 // Bank eer	>> Interface & map
 // Guide 	>> Game control > Interface > score > pointer move & check 
