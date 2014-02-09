@@ -188,12 +188,12 @@ int selectmenu()
 
 void moveselectmenu(int select) 	//add arrow to display
 {
-	display[17+((select+1)*2)-2][33] = '>';
+	display[17+((select+1)*2)-2][32] = '>';
 }
 
 void delmoveselectmenu(int select) //delete arrow 
 {
-	display[17+((select+1)*2)-2][33] = ' ';
+	display[17+((select+1)*2)-2][32] = ' ';
 }
 
 void printdis()	//print display
@@ -565,34 +565,53 @@ void gameplay()
 		}
 	}
 
-	void draw()
-	{
-		printf("Draw");
-		startinterface();
-		gotomenu(selectmenu());
-	}
-
 	void checkwinner() 
 	{
+		int j;
 		if(score1>score2)
 		{
+			char p1winround[13] = {"Player1 WIN!!"};
 			winner = 0;
 			scorewinner=score1;
-			checkSaveRank(game_player[winner],scorewinner);
+			checkSaveRank(game_player[winner],scorewinner);			
+			for(j=0;j<13;j++)
+			{
+				display[17][30+j] = p1winround[j];
+			}
+			system("cls");
+			printdis();
+			getch();
 			startinterface();
 			gotomenu(selectmenu());
 		}
 		else if(score2>score1)
 		{
+			char p2winround[13] = {"Player2 WIN!!"};
 			winner = 1;
 			scorewinner = score2;
 			checkSaveRank(game_player[winner],scorewinner);
+			for(j=0;j<13;j++)
+			{
+				display[17][30+j] = p2winround[j];
+			}
+			system("cls");
+			printdis();
+			getch();
 			startinterface();
 			gotomenu(selectmenu());
 		}
 		else
 		{
-			draw();
+			char drawround[4] = {"Draw"};
+			for(j=0;j<4;j++)
+			{
+				display[17][35+j] = drawround[j];
+			}
+			system("cls");
+			printdis();
+			getch();
+			startinterface();
+			gotomenu(selectmenu());
 		}
 	}
 
@@ -627,16 +646,15 @@ void gameplay()
 		addpointer();
 		addscore();
 		addround();
-		printdis();
-		in = getch();
-		checkship();
-		movepointer();
 		if(countshoot>=50)
 		{
 			checkwinner();
 			break;
 		}
-		
+		printdis();
+		in = getch();
+		checkship();
+		movepointer();
 	}
 }
 // What Work Who Work
