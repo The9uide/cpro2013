@@ -19,6 +19,7 @@ void leaderboard();
 void option();
 void saveScore(char playerName[100] , int playerScore,int swt);
 void readScore();
+char game_player[2][100] ;
 void sortRank();
 void checkSaveRank(char playerName2[100] ,int nowscore2);
 char UserRank[3][100];
