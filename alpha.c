@@ -124,7 +124,6 @@ void home_leader() //add interface to display
 	printf(" > 3rd  %s  -  %d Point\n",UserRank[third],scoreRank[third][0] );
 	printf("\nPress Any Key to Back\n");
 
-
 }
 void home_option() //add interface to display
 {
@@ -144,8 +143,6 @@ void home_option() //add interface to display
 	gets(game_player[1]);
 	printf("!! Change player name success !! \n Player1 :  %s\n Player2 : %s\n",game_player[0],game_player[1] );
 	printf("\nPress Any Key to Back\n");
-
-
 }
 //end pame code
 int selectmenu() 
@@ -253,7 +250,7 @@ void gotomenu(int select) 	//go to page
 void gameplay()
 {
 	char field1[23][74],field2[23][74],in,fieldp1[23][74],fieldp2[23][74];
-	int score1=0,score2=0,time1,x=2,y=5,p1=1,p2=1,sizeship=6,countship=0,playerround=0,countshoot=0;
+	int score1=0,score2=0,time1,x=2,y=5,p1=1,p2=1,sizeship=6,countship=0,playerround=0,countshoot=0,rotate=0;
 	
 	void gameplayinterface()
 	{
@@ -389,13 +386,13 @@ void gameplay()
 		void addship()
 		{
 			char 	small2[3][6] = {{"/----\\"}, //36
-									{"<====>"},
+									{"<=|=|>"},
 									{"\\----/"}},
 					mid2[3][9]	= {	{"/-------\\"}, //54
-									{"<=======>"},
+									{"<=|=|=|>"},
 									{"\\-------/"}},
 					big2[3][12]	= {	{"/----------\\"},//72
-									{"<==========>"},
+									{"<=|=|=|=|=|>"},
 									{"\\----------/"}};
 			int m,j;
 			x = (in == ' ' && x >= 67) ? x-3:x;
@@ -404,7 +401,14 @@ void gameplay()
 			{	
 				for(j=0;j<sizeship;j++)
 				{
-					display[y+m][x+j] = (sizeship==6) ? small2[m][j]:(sizeship==9) ? mid2[m][j]:big2[m][j];
+					if(rotate%2)
+					{
+						display[y+j][x+m] = (sizeship==6) ? small2[m][j]:(sizeship==9) ? mid2[m][j]:big2[m][j];
+					}
+					else 
+					{
+						display[y+m][x+j] = (sizeship==6) ? small2[m][j]:(sizeship==9) ? mid2[m][j]:big2[m][j];
+					}
 				}
 			}
 		}
@@ -419,7 +423,15 @@ void gameplay()
 			else if(in == 's' || in == 'S')
 			{
 				y+=1;
-				y = (y>25) ? y-1:y;
+				if(rotate%2==1)
+				{
+					y = (y>28-sizeship) ? y-1:y;
+				}
+				else
+				{
+					y = (y>25) ? y-1:y;
+				}
+
 			}
 			else if(in == 'a' || in == 'A')
 			{
@@ -429,7 +441,14 @@ void gameplay()
 			else if(in == 'd' || in == 'D')
 			{
 				x+=1;
-				x = (x>76-sizeship) ? x-1:x;
+				if(rotate%2==1)
+				{
+					x = (x>73) ? x-1:x;
+				}
+				else
+				{
+					x = (x>76-sizeship) ? x-1:x;
+				}
 			}
 		}
 		void saveship()
@@ -450,14 +469,28 @@ void gameplay()
 				for(m=0;m<3;m++)
 				{	
 					for(j=0;j<sizeship;j++)
-					{		
-						if(playerround%2 == 0)
-						{
-							fieldp1[y+m-5][x+j-2] = (sizeship==6) ? small1[m][j]:(sizeship==9) ? mid1[m][j]:big1[m][j];
+					{	
+						if(rotate%2)
+						{	
+							if(playerround%2 == 0)
+							{
+								fieldp1[y+j-5][x+m-2] = (sizeship==6) ? small1[m][j]:(sizeship==9) ? mid1[m][j]:big1[m][j];
+							}
+							else
+							{
+								fieldp2[y+j-5][x+m-2] = (sizeship==6) ? small1[m][j]:(sizeship==9) ? mid1[m][j]:big1[m][j];
+							}
 						}
 						else
 						{
-							fieldp2[y+m-5][x+j-2] = (sizeship==6) ? small1[m][j]:(sizeship==9) ? mid1[m][j]:big1[m][j];
+							if(playerround%2 == 0)
+							{
+								fieldp1[y+m-5][x+j-2] = (sizeship==6) ? small1[m][j]:(sizeship==9) ? mid1[m][j]:big1[m][j];
+							}
+							else
+							{
+								fieldp2[y+m-5][x+j-2] = (sizeship==6) ? small1[m][j]:(sizeship==9) ? mid1[m][j]:big1[m][j];
+							}
 						}
 					}
 				}
@@ -465,6 +498,11 @@ void gameplay()
 				y = 5;
 				countship +=1;
 			}
+			else if(in == 'e' || in == 'E')
+			{
+				rotate++;
+			}
+			
 		}
 
 		void addfieldplayer()
