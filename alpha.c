@@ -518,6 +518,52 @@ void gameplay()
 			}
 		}
 
+		int issaveship()
+		{
+			int m,j;
+			for(m=0;m<3;m++)
+			{	
+				for(j=0;j<sizeship;j++)
+				{
+					if(rotate%2)
+					{
+						if(playerround%2 == 0)
+						{
+							if(fieldp1[y+j-5][x+m-2] == '@')
+							{
+								return 0;
+							}
+						}
+						else
+						{
+							if(fieldp2[y+j-5][x+m-2] == '@')
+							{
+								return 0;
+							}
+						}
+					}
+					else
+					{
+						if(playerround%2 == 0)
+						{
+							if(fieldp1[y+m-5][x+j-2] == '@')
+							{
+								return 0;
+							}
+						}
+						else
+						{
+							if(fieldp2[y+m-5][x+j-2] == '@')
+							{
+								return 0;
+							}
+						}
+					}
+				}
+			}
+			return 1;
+		}
+
 		while(1)
 		{
 			system("cls");
@@ -526,7 +572,10 @@ void gameplay()
 			addship();
 			printdis();
 			in = getch();
-			saveship();
+			if(issaveship())
+			{
+				saveship();
+			}
 			moveship();
 			if(countship == 6 && playerround == 1 )
 			{
@@ -670,6 +719,52 @@ void gameplay()
 		}
 	}
 
+	int ischeckship()
+		{
+			int m,j;
+			for(m=0;m<3;m++)
+			{	
+				for(j=0;j<3;j++)
+				{
+					if(rotate%2)
+					{
+						if(playerround%2 == 0)
+						{
+							if(field1[y+j-5][x+m-2] == '*')
+							{
+								return 0;
+							}
+						}
+						else
+						{
+							if(field2[y+j-5][x+m-2] == '*')
+							{
+								return 0;
+							}
+						}
+					}
+					else
+					{
+						if(playerround%2 == 0)
+						{
+							if(field1[y+m-5][x+j-2] == '*')
+							{
+								return 0;
+							}
+						}
+						else
+						{
+							if(field2[y+m-5][x+j-2] == '*')
+							{
+								return 0;
+							}
+						}
+					}
+				}
+			}
+			return 1;
+		}
+
 	system("cls");
 	cleardis();
 	gameplayinterface();
@@ -691,7 +786,10 @@ void gameplay()
 		}
 		printdis();
 		in = getch();
-		checkship();
+		if(ischeckship())
+		{
+			checkship();
+		}
 		movepointer();
 	}
 }
