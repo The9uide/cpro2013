@@ -19,7 +19,7 @@ void leaderboard();
 void option();
 void saveScore(char playerName[100] , int playerScore,int swt);
 void readScore();
-char game_player[2][100] ;
+char game_player[2][100];
 void sortRank();
 void checkSaveRank(char playerName2[100] ,int nowscore2);
 char UserRank[3][100];
@@ -78,7 +78,7 @@ void home(char display[roll][column],int column_slide,int m) //add interface to 
                                                 {"                                                   "},
                                                 {"                      Leaderboard                  "},
                                                 {"                                                   "},
-                                                {"                         Option                    "},
+                                                {"                  Change player name               "},
                                                 {"                                                   "},
                                                 {"                          Exit                     "}
     };
@@ -120,6 +120,27 @@ void home_leader() //add interface to display
 	printf(" > 1st  %s  -  %d Point\n",UserRank[0],scoreRank[0][0] );
 	printf(" > 2nd  %s  -  %d Point\n",UserRank[1],scoreRank[1][0] );
 	printf(" > 3rd  %s  -  %d Point\n",UserRank[2],scoreRank[2][0] );
+	printf("\nPress Any Key to Back\n");
+
+
+}
+void home_option() //add interface to display
+{
+	readScore();
+	int i,count =0;
+	char home[6][51]={							{" +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n"},
+                                                {"|  OPTION     _ ___      __     __      ___  __  |\n"}, 
+                                                {"|  |_)  /_\\  |   |  |   |__    (__ |__|  |  |__) |\n"},
+                                                {"|  |_) /   \\ |   |  |__ |__     __)|  | _|_ |    |\n"},
+ 												{"|                                       ComPrompt|\n"},
+                                                {" -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+\n"}
+    };
+	printf("%s\n",home[0] ); 
+	printf(" > Input player 1 Name: \n");
+	gets(game_player[0]);
+	printf(" > Input player 2 Name: \n");
+	gets(game_player[1]);
+	printf("!! Change player name success !! \n Player1 :  %s\n Player2 : %s\n",game_player[0],game_player[1] );
 	printf("\nPress Any Key to Back\n");
 
 
@@ -214,7 +235,12 @@ void gotomenu(int select) 	//go to page
 	}
 	else if(select == 2)
 	{
-		option();
+		system("cls"); //clear display
+		cleardis();
+		home_option();
+		char in = getch(); //input
+		startinterface();
+		gotomenu(selectmenu());
 	}
 	if(select == 3)
 	{
