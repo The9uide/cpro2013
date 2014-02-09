@@ -44,7 +44,6 @@ void startinterface() //first page
 		cleardis();
 		for(m=0;m<roll;m++) 
 		{	
-			sleep(1);
 			home(display,column_slide,m);
 		}
 		printdis();
@@ -80,7 +79,7 @@ void home(char display[roll][column],int column_slide,int m) //add interface to 
                                                 {"                                                   "},
                                                 {"                      Leaderboard                  "},
                                                 {"                                                   "},
-                                                {"                     Change player name            "},
+                                                {"                   Change player name              "},
                                                 {"                                                   "},
                                                 {"                          Exit                     "}
     };
@@ -299,10 +298,10 @@ void gameplay()
 		void showheader()
 		{
 			char p1round[3][26] = { 		{"                          "},
-											{"       Player1 Round 0    "},
+											{"       Player1 Round      "},
 											{"                          "}},
 				 p2round[3][26] = { 		{"                          "},
-											{"       Player2 Round 0    "},
+											{"       Player2 Round      "},
 											{"                          "}};
 			int m,j;
 			for(m=0;m<3;m++)
@@ -568,10 +567,9 @@ void gameplay()
 
 	void draw()
 	{
-		prinf("Draw")
+		printf("Draw");
 		startinterface();
 		gotomenu(selectmenu());
-
 	}
 
 	void checkwinner() 
@@ -598,6 +596,23 @@ void gameplay()
 		}
 	}
 
+	void addround()
+	{
+		char sc[10];
+		if(countshoot/2<9)
+		{
+			itoa(countshoot/2+1,sc,10);
+			display[2][48] = sc[0];
+		}
+		else
+		{
+			itoa(((countshoot+2)/2%10),sc,10);
+			display[2][48] = sc[0];
+			itoa(((countshoot+2)/2/10),sc,10);
+			display[2][47] = sc[0];
+		}
+	}
+
 	system("cls");
 	cleardis();
 	gameplayinterface();
@@ -611,8 +626,8 @@ void gameplay()
 		addfield();
 		addpointer();
 		addscore();
+		addround();
 		printdis();
-		printf("%d %d",score1,score2);
 		in = getch();
 		checkship();
 		movepointer();
