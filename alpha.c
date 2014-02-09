@@ -299,10 +299,10 @@ void gameplay()
 		void showheader()
 		{
 			char p1round[3][26] = { 		{"                          "},
-											{"       Player1 Round 1    "},
+											{"       Player1 Round 0    "},
 											{"                          "}},
 				 p2round[3][26] = { 		{"                          "},
-											{"       Player2 Round 1    "},
+											{"       Player2 Round 0    "},
 											{"                          "}};
 			int m,j;
 			for(m=0;m<3;m++)
@@ -568,8 +568,10 @@ void gameplay()
 
 	void draw()
 	{
+		prinf("Draw")
 		startinterface();
 		gotomenu(selectmenu());
+
 	}
 
 	void checkwinner() 
@@ -579,12 +581,16 @@ void gameplay()
 			winner = 0;
 			scorewinner=score1;
 			checkSaveRank(game_player[winner],scorewinner);
+			startinterface();
+			gotomenu(selectmenu());
 		}
 		else if(score2>score1)
 		{
 			winner = 1;
 			scorewinner = score2;
 			checkSaveRank(game_player[winner],scorewinner);
+			startinterface();
+			gotomenu(selectmenu());
 		}
 		else
 		{
