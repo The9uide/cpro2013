@@ -78,7 +78,7 @@ void home(char display[roll][column],int column_slide,int m) //add interface to 
                                                 {"                                                   "},
                                                 {"                      Leaderboard                  "},
                                                 {"                                                   "},
-                                                {"                  Change player name               "},
+                                                {"                     Change player name            "},
                                                 {"                                                   "},
                                                 {"                          Exit                     "}
     };
