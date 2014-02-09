@@ -44,6 +44,7 @@ void startinterface() //first page
 		cleardis();
 		for(m=0;m<roll;m++) 
 		{	
+			sleep(1);
 			home(display,column_slide,m);
 		}
 		printdis();
