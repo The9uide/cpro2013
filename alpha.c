@@ -20,7 +20,7 @@ void leaderboard();
 void option();
 void saveScore(char playerName[100] , int playerScore,int swt);
 void readScore();
-char game_player[2][100];
+char game_player[2][100] = {{"Player1"},{"Player2"}};
 void sortRank();
 void checkSaveRank(char playerName2[100] ,int nowscore2);
 char UserRank[3][100];
@@ -37,7 +37,7 @@ int main() //main
 void startinterface() //first page
 {
 	int column_slide,m,i,j,count;
-	// system("mode con:cols=79 lines=30");
+	system("mode con:cols=79 lines=30");
 	for(column_slide=column;column_slide>=0;column_slide-=2) //print slide
 	{
 		system("cls"); //clear display
@@ -720,50 +720,50 @@ void gameplay()
 	}
 
 	int ischeckship()
-		{
-			int m,j;
-			for(m=0;m<3;m++)
-			{	
-				for(j=0;j<3;j++)
+	{
+		int m,j;
+		for(m=0;m<3;m++)
+		{	
+			for(j=0;j<3;j++)
+			{
+				if(rotate%2)
 				{
-					if(rotate%2)
+					if(playerround%2 == 0)
 					{
-						if(playerround%2 == 0)
+						if(field1[y+j-5][x+m-2] == '*')
 						{
-							if(field1[y+j-5][x+m-2] == '*')
-							{
-								return 0;
-							}
-						}
-						else
-						{
-							if(field2[y+j-5][x+m-2] == '*')
-							{
-								return 0;
-							}
+							return 0;
 						}
 					}
 					else
 					{
-						if(playerround%2 == 0)
+						if(field2[y+j-5][x+m-2] == '*')
 						{
-							if(field1[y+m-5][x+j-2] == '*')
-							{
-								return 0;
-							}
+							return 0;
 						}
-						else
+					}
+				}
+				else
+				{
+					if(playerround%2 == 0)
+					{
+						if(field1[y+m-5][x+j-2] == '*')
 						{
-							if(field2[y+m-5][x+j-2] == '*')
-							{
-								return 0;
-							}
+							return 0;
+						}
+					}
+					else
+					{
+						if(field2[y+m-5][x+j-2] == '*')
+						{
+							return 0;
 						}
 					}
 				}
 			}
-			return 1;
 		}
+			return 1;
+	}
 
 	system("cls");
 	cleardis();
