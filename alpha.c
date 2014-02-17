@@ -141,7 +141,7 @@ void home_option() //add interface to display
 	gets(game_player[0]);
 	printf(" > Input player 2 Name: \n");
 	gets(game_player[1]);
-	printf("!! Change player name success !! \n Player1 :  %s\n Player2 : %s\n",game_player[0],game_player[1] );
+	printf("!! Change player name success !! \n Player1 : %s\n Player2 : %s\n",game_player[0],game_player[1] );
 	printf("\nPress Any Key to Back\n");
 }
 //end pame code
